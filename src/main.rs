@@ -26,7 +26,7 @@ fn echo_server(port: u16) -> Result<()> {
     loop {
         let mut buffer = [0; BUFFER_SIZE];
         let (size, src) = socket.recv_from(&mut buffer)?;
-        println!("{}", str::from_utf8(&buffer[..size])?);
+        print!("{}", str::from_utf8(&buffer[..size])?);
         socket.send_to(&buffer[..size],src)?;
     }
 }
@@ -39,6 +39,6 @@ fn echo_client(dest: &str) -> Result<()> {
         socket.send_to(input.as_bytes(), dest)?;
         let mut buffer = [0; BUFFER_SIZE];
         let (n, _) = socket.recv_from(&mut buffer)?;
-        println!("{}", str::from_utf8(&buffer[..n])?)
+        print!("{}", str::from_utf8(&buffer[..n])?)
     }
 }
